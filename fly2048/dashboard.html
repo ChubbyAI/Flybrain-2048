@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>FLYBRAIN × 2048</title>
+<style>
+:root{--bg:#0b0d10;--panel:#12161b;--line:#222a33;--text:#e7ecf1;--dim:#8793a0;--amber:#ffb23e;--red:#ff5a5a;--cyan:#3ed8ff;--green:#6cf08a;--pink:#ff5ad2;--yellow:#ffe14d}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;background:var(--bg);color:var(--text);font:13px/1.4 ui-monospace,SFMono-Regular,Consolas,monospace;
+  padding:12px 16px;display:flex;flex-direction:column;gap:10px;overflow:hidden}
+header{flex:none;display:flex;flex-wrap:wrap;align-items:flex-start;gap:8px 16px}
+header > div:first-child{flex:1;min-width:280px;display:flex;flex-direction:column;gap:4px}
+h1{margin:0;font-size:19px;letter-spacing:.08em;white-space:nowrap}
+h1 b{color:var(--amber)}
+.intro{margin:0;max-width:52em;color:var(--text);font-size:12px;line-height:1.45}
+.sub{color:var(--dim);font-size:12px}
+.sub a{color:var(--amber);text-decoration:none}
+.sub a:hover{text-decoration:underline}
+.toolbar{margin-left:auto;display:flex;gap:8px;align-items:center}
+button{background:#1a2129;color:var(--text);border:1px solid var(--line);border-radius:4px;padding:5px 12px;font:inherit;cursor:pointer}
+button:hover{border-color:var(--amber);color:var(--amber)}
+button.on{background:var(--amber);color:#000;border-color:var(--amber)}
+main{flex:1;min-height:0;display:grid;grid-template-columns:minmax(420px,1fr) minmax(0,1.15fr);gap:10px}
+.col{display:flex;flex-direction:column;gap:10px;min-height:0}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:10px;min-width:0;min-height:0;display:flex;flex-direction:column}
+.panel.grow{flex:1}
+.panel h2{flex:none;margin:0 0 8px;font-size:11px;font-weight:600;color:var(--dim);letter-spacing:.12em;text-transform:uppercase;
+  display:flex;justify-content:space-between;gap:12px;white-space:nowrap;overflow:hidden}
+.panel h2 span:last-child{overflow:hidden;text-overflow:ellipsis;text-transform:none;letter-spacing:.02em;font-weight:500}
+.wrap{flex:1;min-height:0;display:flex;align-items:center;justify-content:center}
+.game{position:relative;background:#faf8ef;border-radius:6px;overflow:hidden}
+.game iframe{border:0;background:#faf8ef}
+#brain{display:block}
+.row{display:grid;grid-template-columns:7.2em 1fr 1fr;gap:6px;align-items:center;margin:3px 0}
+.row span{color:var(--dim);white-space:nowrap}
+.bar{height:10px;background:#0a0c0f;border:1px solid var(--line);border-radius:3px;overflow:hidden}
+.bar i{display:block;height:100%;width:0}
+.buttons{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.btn{padding:4px 10px;border:1px solid var(--line);border-radius:4px;color:var(--dim)}
+.btn.on{background:var(--amber);color:#000;border-color:var(--amber)}
+.legend{flex:none;display:flex;flex-wrap:wrap;gap:2px 14px;color:var(--dim);font-size:11px;margin-top:6px}
+.legend i{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:5px}
+@media (max-width:980px){
+  body{overflow:auto;height:auto}
+  main{display:flex;flex-direction:column}
+  .panel.grow .wrap{flex:none;height:70vw}
+  #brainpanel .wrap{height:92vw}
+}
+</style>
+</head>
+<body>
+<header>
+  <div>
+    <h1><b>FLYBRAIN</b> × 2048</h1>
+    <p class="intro">Unofficial adapter: the open-source <a href="https://github.com/alextitonis/fly.ai" target="_blank" rel="noopener">fly.ai</a> MaleCNS connectome (166,700 neurons, no training) plays GameWorld’s 2048. Not affiliated with the fly.ai authors. Visual cells read the board; descending neurons vote for the next move.</p>
+    <div class="sub" id="stats">loading connectome…</div>
+    <div class="sub">brain: <a href="https://github.com/alextitonis/fly.ai" target="_blank" rel="noopener">alextitonis/fly.ai</a> · pip <a href="https://pypi.org/project/flybrain/" target="_blank" rel="noopener">flybrain</a> · MIT · alextitonis, 2026 · data: MaleCNS v1.0, CC BY 4.0, FlyEM / HHMI Janelia</div>
+    <div class="sub">game: <a href="https://github.com/gameworld-project/GameWorld-Games" target="_blank" rel="noopener">GameWorld 01_2048</a> · based on <a href="https://github.com/gabrielecirulli/2048" target="_blank" rel="noopener">gabrielecirulli/2048</a> · MIT · Gabriele Cirulli, 2014</div>
+  </div>
+  <div class="toolbar">
+    <button id="toggle" class="on">Pause</button>
+    <button id="reset">New game</button>
+  </div>
+</header>
+<main>
+  <div class="col">
+    <section class="panel grow">
+      <h2><span>GameWorld 2048</span><span id="scoreline">score 0 · max 0</span></h2>
+      <div class="wrap" id="gamewrap">
+        <div class="game" id="gamebox">
+          <iframe id="game" src="/game/index.html" title="2048"></iframe>
+        </div>
+      </div>
+    </section>
+    <section class="panel">
+      <h2><span>Eyes → brain</span><span>left · right</span></h2>
+      <div class="row"><span>looming</span><div class="bar"><i id="loomL" style="background:var(--red)"></i></div><div class="bar"><i id="loomR" style="background:var(--red)"></i></div></div>
+      <div class="row"><span>threat</span><div class="bar"><i id="threatL" style="background:var(--pink)"></i></div><div class="bar"><i id="threatR" style="background:var(--pink)"></i></div></div>
+      <div class="row"><span>small tiles</span><div class="bar"><i id="shotL" style="background:var(--yellow)"></i></div><div class="bar"><i id="shotR" style="background:var(--yellow)"></i></div></div>
+      <div class="row"><span>chase</span><div class="bar"><i id="chaseL" style="background:var(--cyan)"></i></div><div class="bar"><i id="chaseR" style="background:var(--cyan)"></i></div></div>
+      <div class="buttons">
+        <span class="btn" id="b-up">▲ UP</span>
+        <span class="btn" id="b-right">▶ RIGHT</span>
+        <span class="btn" id="b-down">▼ DOWN</span>
+        <span class="btn" id="b-left">◀ LEFT</span>
+      </div>
+    </section>
+    <section class="panel">
+      <h2><span>Brain → move</span><span id="motorhead">descending neurons</span></h2>
+      <div id="motor"></div>
+    </section>
+  </div>
+  <div class="col">
+    <section class="panel grow" id="brainpanel">
+      <h2><span>fly.ai MaleCNS</span><span id="spk">—</span></h2>
+      <div class="wrap" id="brainwrap"><canvas id="brain" width="900" height="900"></canvas></div>
+      <div class="legend">
+        <span><i style="background:var(--amber)"></i>fired</span>
+        <span><i style="background:var(--red)"></i>looming (LPLC2)</span>
+        <span><i style="background:var(--pink)"></i>threat (LC4)</span>
+        <span><i style="background:var(--yellow)"></i>small tiles (LPLC1)</span>
+        <span><i style="background:var(--cyan)"></i>chase (LC10a)</span>
+        <span><i style="background:var(--green)"></i>command neurons</span>
+      </div>
+    </section>
+  </div>
+</main>
+<script>
+const $ = (id) => document.getElementById(id);
+let S = null, base = null, glow = null;
+const brain = $("brain"), bctx = brain.getContext("2d");
+const css = (v) => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+const MOVE_NAME = {0: "up", 1: "right", 2: "down", 3: "left"};
+let playing = true;
+let busy = false;
+let lastMove = null;
+
+function fitGame() {
+  const wrap = $("gamewrap");
+  const box = $("gamebox");
+  const frame = $("game");
+  const W = wrap.clientWidth, H = wrap.clientHeight || 640;
+  const srcW = 500, srcH = 720;
+  let w = W, h = W * srcH / srcW;
+  if (h > H) { h = H; w = H * srcW / srcH; }
+  box.style.width = `${Math.floor(w)}px`;
+  box.style.height = `${Math.floor(h)}px`;
+  frame.style.width = `${srcW}px`;
+  frame.style.height = `${srcH}px`;
+  const s = w / srcW;
+  frame.style.transformOrigin = "0 0";
+  frame.style.transform = `scale(${s})`;
+}
+function fitBrain() {
+  const wrap = $("brainwrap");
+  const W = wrap.clientWidth, H = wrap.clientHeight || W;
+  const s = Math.min(W, H);
+  brain.style.width = `${Math.floor(s)}px`;
+  brain.style.height = `${Math.floor(s)}px`;
+}
+function layout() { fitGame(); fitBrain(); }
+addEventListener("resize", layout);
+
+function gameWin() { return $("game").contentWindow; }
+
+function boardFromState(st) {
+  const env = st && st.game_state && st.game_state.environment;
+  if (!Array.isArray(env) || env.length !== 4) return null;
+  return env;
+}
+
+async function thinkOnce() {
+  if (busy) return;
+  const win = gameWin();
+  if (!win || !win.gameAPI || !win.__gameManager) return;
+  const st = win.gameAPI.getState();
+  if (!st || st.status === "loading") return;
+  if (st.terminal && st.terminal.isTerminal) {
+    playing = false;
+    $("toggle").textContent = "Play";
+    $("toggle").classList.remove("on");
+    $("scoreline").textContent = `${st.terminal.outcome || "over"} · score ${st.game_state.score} · max ${st.metrics.max_tile}`;
+    return;
+  }
+  const board = boardFromState(st);
+  if (!board) return;
+  busy = true;
+  try {
+    const res = await fetch("/think", {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({board, score: st.game_state.score, max_tile: st.metrics.max_tile})
+    });
+    const data = await res.json();
+    if (typeof data.move === "number") {
+      lastMove = data.move;
+      win.__gameManager.move(data.move);
+      $("scoreline").textContent = `score ${win.__gameManager.score} · ${MOVE_NAME[data.move]}`;
+    }
+  } catch (err) {
+    console.error(err);
+  } finally {
+    busy = false;
+  }
+}
+
+async function loop() {
+  if (playing) await thinkOnce();
+  setTimeout(loop, 420);
+}
+
+$("toggle").onclick = () => {
+  playing = !playing;
+  $("toggle").textContent = playing ? "Pause" : "Play";
+  $("toggle").classList.toggle("on", playing);
+};
+$("reset").onclick = async () => {
+  const win = gameWin();
+  if (win && win.gameAPI) await win.gameAPI.reset({seed: 42});
+  await fetch("/reset", {method: "POST"});
+  playing = true;
+  $("toggle").textContent = "Pause";
+  $("toggle").classList.add("on");
+};
+
+async function init() {
+  layout();
+  S = await (await fetch("/static.json")).json();
+  $("stats").textContent = `${S.neurons.toLocaleString()} neurons · ${S.connections.toLocaleString()} connections · fly.ai MaleCNS v1.0`;
+  base = document.createElement("canvas"); base.width = base.height = 900;
+  const g = base.getContext("2d"); g.fillStyle = "rgba(150,170,190,0.13)";
+  for (let i = 0; i < S.x.length; i++) g.fillRect(S.x[i] * 0.9, S.y[i] * 0.9, 1.6, 1.6);
+  glow = document.createElement("canvas"); glow.width = glow.height = 900;
+  const m = $("motor");
+  for (const [key, [neuron, action]] of Object.entries(S.labels)) {
+    m.insertAdjacentHTML("beforeend",
+      `<div class="row"><span>${neuron}</span><div class="bar"><i id="m-${key}_L" style="background:var(--green)"></i></div><div class="bar"><i id="m-${key}_R" style="background:var(--green)"></i></div></div>`);
+  }
+  layout();
+  new EventSource("/events").onmessage = (e) => draw(JSON.parse(e.data));
+  $("game").addEventListener("load", () => setTimeout(loop, 600));
+}
+
+function drawBrain(d) {
+  const g = glow.getContext("2d");
+  g.globalCompositeOperation = "destination-out"; g.fillStyle = "rgba(0,0,0,0.35)"; g.fillRect(0, 0, 900, 900);
+  g.globalCompositeOperation = "source-over"; g.fillStyle = css("--amber");
+  for (const i of d.spikes) g.fillRect(S.x[i] * 0.9 - 1, S.y[i] * 0.9 - 1, 2.4, 2.4);
+  bctx.fillStyle = css("--panel"); bctx.fillRect(0, 0, 900, 900);
+  bctx.drawImage(base, 0, 0); bctx.drawImage(glow, 0, 0);
+  const tint = (ids, color, a) => {
+    if (a <= 0) return;
+    bctx.globalAlpha = Math.min(1, a * 1.25);
+    bctx.fillStyle = color;
+    for (const i of ids) bctx.fillRect(S.x[i] * 0.9 - 1.5, S.y[i] * 0.9 - 1.5, 3.2, 3.2);
+    bctx.globalAlpha = 1;
+  };
+  const colors = {loom: "--red", threat: "--pink", shot: "--yellow", chase: "--cyan"};
+  for (const s of "LR") for (const [ch, c] of Object.entries(colors)) {
+    tint(S.groups[ch + s] || [], css(c), d.drive[ch + s] || 0);
+  }
+  bctx.font = "600 17px ui-monospace,Consolas,monospace";
+  for (const [key, [neuron]] of Object.entries(S.labels)) for (const s of "LR") {
+    const ids = S.groups[`${key}_${s}`] || [];
+    if (!ids.length) continue;
+    const on = d.now[`${key}_${s}`];
+    for (const i of ids) {
+      const x = S.x[i] * 0.9, y = S.y[i] * 0.9;
+      bctx.beginPath(); bctx.arc(x, y, on ? 11 : 6, 0, Math.PI * 2);
+      bctx.fillStyle = on ? css("--green") : "rgba(108,240,138,0.25)"; bctx.fill();
+      bctx.strokeStyle = css("--green"); bctx.lineWidth = 1.5; bctx.stroke();
+    }
+    if (!on) continue;
+    const i = ids[0], x = S.x[i] * 0.9, y = S.y[i] * 0.9;
+    bctx.fillStyle = css("--text");
+    bctx.textAlign = s === "L" ? "right" : "left";
+    bctx.fillText(`${neuron} ${s}`, x + (s === "L" ? -15 : 15), y + 5);
+  }
+}
+
+function draw(d) {
+  drawBrain(d);
+  $("spk").textContent = `${d.total.toLocaleString()} spikes / think · ${d.ms} ms`;
+  $("motorhead").textContent = d.move_name ? `chose ${d.move_name}` : "descending neurons";
+  for (const [k, v] of Object.entries(d.drive || {})) {
+    const el = $(k);
+    if (el) el.style.width = `${Math.min(100, v / 0.8 * 100)}%`;
+  }
+  for (const [g, c] of Object.entries(d.counts || {})) {
+    const el = $("m-" + g);
+    if (el) el.style.width = `${Math.min(100, c * 20)}%`;
+  }
+  for (const name of ["up", "right", "down", "left"]) {
+    $("b-" + name).classList.toggle("on", d.move_name === name);
+  }
+}
+init();
+</script>
+</body>
+</html>

@@ -1,0 +1,336 @@
+{
+  "schema_version": 1,
+  "created_at_utc": "2026-09-20T04:02:28.934987+00:00",
+  "package": "flybrain-2048",
+  "file_count": 39,
+  "total_bytes": 19213296,
+  "sources": [
+    {
+      "name": "fly.ai / flybrain",
+      "url": "https://github.com/alextitonis/fly.ai",
+      "path": "third_party/fly.ai",
+      "license": "MIT"
+    },
+    {
+      "name": "GameWorld 01_2048",
+      "url": "https://github.com/gameworld-project/GameWorld-Games",
+      "path": "games/01_2048",
+      "upstream": "https://github.com/gabrielecirulli/2048",
+      "license": "MIT"
+    }
+  ],
+  "files": [
+    {
+      "path": ".env.example",
+      "bytes": 341,
+      "sha256": "d78ebda9c859b224e39bc8847d698be51424b5ef80cb9c723bce586cbede2ee6",
+      "category": "authored_configuration",
+      "provenance": "Public defaults",
+      "license_scope": "Alpha"
+    },
+    {
+      "path": ".gitignore",
+      "bytes": 689,
+      "sha256": "543673951437c4e9b5ddad46d593defe3fee494d11379b058847d9fa1ff8eecf",
+      "category": "authored_configuration",
+      "provenance": "Public defaults",
+      "license_scope": "Alpha"
+    },
+    {
+      "path": "LICENSE",
+      "bytes": 75,
+      "sha256": "fb16f57fbc97ed80a00f928fa033b82223dbd93671829593656ab5225eaa076f",
+      "category": "license",
+      "provenance": "Adapter Alpha license",
+      "license_scope": "Alpha"
+    },
+    {
+      "path": "README.md",
+      "bytes": 3526,
+      "sha256": "fd4ec66b318b0cfa5cfb668ac4bf15dc43ebf3d4b37575ee3135cb895d87b6c8",
+      "category": "authored_documentation",
+      "provenance": "Project docs",
+      "license_scope": "Alpha for authored text"
+    },
+    {
+      "path": "README.zh-CN.md",
+      "bytes": 3448,
+      "sha256": "a356cceb23b0e4c3d063d70825dcc16844f5d2b8070d0cf2d46fcf264d5ba3df",
+      "category": "authored_documentation",
+      "provenance": "Project docs",
+      "license_scope": "Alpha for authored text"
+    },
+    {
+      "path": "assets/flybrain-2048-full.mp4",
+      "bytes": 19004537,
+      "sha256": "51cea57958549ea2c149b4e4d852cd841b62d7d78aa00a1b9206bd83c899ab8a",
+      "category": "recording_evidence",
+      "provenance": "Full-game recording",
+      "license_scope": "Alpha for metadata"
+    },
+    {
+      "path": "assets/recording_manifest.json",
+      "bytes": 690,
+      "sha256": "fc5163861cd78414621adcbb06b321020a7ecc4134f73c7c3f92b406b1c62c51",
+      "category": "recording_evidence",
+      "provenance": "Full-game recording",
+      "license_scope": "Alpha for metadata"
+    },
+    {
+      "path": "fly2048/dashboard.html",
+      "bytes": 13311,
+      "sha256": "426e43bf54fe03b10a15eaea7b3f230b6e315a27a2eca447721a6cb262cbbf63",
+      "category": "authored_code",
+      "provenance": "Adapter dashboard and controller",
+      "license_scope": "Alpha"
+    },
+    {
+      "path": "fly2048/fly_2048.py",
+      "bytes": 24392,
+      "sha256": "bc966b14b8093257fb26a39ff64b9701bdbc71b71bedacc69e2497043c112d9d",
+      "category": "authored_code",
+      "provenance": "Adapter dashboard and controller",
+      "license_scope": "Alpha"
+    },
+    {
+      "path": "fly2048/requirements.txt",
+      "bytes": 23,
+      "sha256": "69c65f7998ef21ec2b7edc38a7362e1d41478293410311c4617ab2b4d61d8bf4",
+      "category": "authored_code",
+      "provenance": "Adapter dashboard and controller",
+      "license_scope": "Alpha"
+    },
+    {
+      "path": "games/01_2048/LICENSE.txt",
+      "bytes": 1083,
+      "sha256": "57e12c39a6ad9d98b2e451065bfdfbd15fc9e0c2ed3bf4dc1d09acab41ff02fc",
+      "category": "vendored_third_party",
+      "provenance": "Trimmed GameWorld 01_2048 / Cirulli MIT 2048",
+      "license_scope": "MIT (Gabriele Cirulli, 2014)"
+    },
+    {
+      "path": "games/01_2048/RIGHTS.md",
+      "bytes": 401,
+      "sha256": "09af13b4fd7462cfe4cd98477fd33342c866fde1a6aceb0be7a5a85c8d6cfda1",
+      "category": "vendored_third_party",
+      "provenance": "Trimmed GameWorld 01_2048 / Cirulli MIT 2048",
+      "license_scope": "MIT (Gabriele Cirulli, 2014)"
+    },
+    {
+      "path": "games/01_2048/game_api.js",
+      "bytes": 12575,
+      "sha256": "36b766f54dc34113c775f08ff6832c16ff4bed9aa8f10549aa044d5df3c1b077",
+      "category": "vendored_third_party",
+      "provenance": "Trimmed GameWorld 01_2048 / Cirulli MIT 2048",
+      "license_scope": "MIT (Gabriele Cirulli, 2014)"
+    },
+    {
+      "path": "games/01_2048/index.html",
+      "bytes": 8293,
+      "sha256": "3ac08c98f277386f440b84f7c72984168497efb498b6e9680234f306eddad00e",
+      "category": "vendored_third_party",
+      "provenance": "Trimmed GameWorld 01_2048 / Cirulli MIT 2048",
+      "license_scope": "MIT (Gabriele Cirulli, 2014)"
+    },
+    {
+      "path": "games/01_2048/js/application.js",
+      "bytes": 204,
+      "sha256": "13f45db9a24086cc853cc08043ce0511a1e6a51ec3dcfd0b68c518061c84638e",
+      "category": "vendored_third_party",
+      "provenance": "Trimmed GameWorld 01_2048 / Cirulli MIT 2048",
+      "license_scope": "MIT (Gabriele Cirulli, 2014)"
+    },
+    {
+      "path": "games/01_2048/js/game_manager.js",
+      "bytes": 748,
+      "sha256": "7247f5dcefa7c0afc18b74f1c40cb0973fea0e8da09ad03d9443150af48e8e50",
+      "category": "vendored_third_party",
+      "provenance": "Trimmed GameWorld 01_2048 / Cirulli MIT 2048",
+      "license_scope": "MIT (Gabriele Cirulli, 2014)"
+    },
+    {
+      "path": "games/01_2048/js/grid.js",
+      "bytes": 6647,
+      "sha256": "20de8190bcec4a73ed509915dc69383e0364a865568320bac90237fbac84a985",
+      "category": "vendored_third_party",
+      "provenance": "Trimmed GameWorld 01_2048 / Cirulli MIT 2048",
+      "license_scope": "MIT (Gabriele Cirulli, 2014)"
+    },
+    {
+      "path": "games/01_2048/js/html_actuator.js",
+      "bytes": 3468,
+      "sha256": "7ceb83d9ead0c06f8a10edf5dfd8dd995e044446956a4680e78b1bbce709ff7e",
+      "category": "vendored_third_party",
+      "provenance": "Trimmed GameWorld 01_2048 / Cirulli MIT 2048",
+      "license_scope": "MIT (Gabriele Cirulli, 2014)"
+    },
+    {
+      "path": "games/01_2048/js/keyboard_input_manager.js",
+      "bytes": 1165,
+      "sha256": "0aec43c5300c79f883d386e77136cad024596b76a9d9715575fbd108867aa398",
+      "category": "vendored_third_party",
+      "provenance": "Trimmed GameWorld 01_2048 / Cirulli MIT 2048",
+      "license_scope": "MIT (Gabriele Cirulli, 2014)"
+    },
+    {
+      "path": "games/01_2048/js/tile.js",
+      "bytes": 350,
+      "sha256": "3943cc42c6a255b57bad7460566b0331ac815f9746160b19b0ada76a2985a8df",
+      "category": "vendored_third_party",
+      "provenance": "Trimmed GameWorld 01_2048 / Cirulli MIT 2048",
+      "license_scope": "MIT (Gabriele Cirulli, 2014)"
+    },
+    {
+      "path": "games/01_2048/style/fonts/ClearSans-Bold-webfont.woff",
+      "bytes": 27120,
+      "sha256": "b16e36cc53aa72023c67ab31c38290de77905dd2285f331189b2236100b8f849",
+      "category": "vendored_third_party",
+      "provenance": "Trimmed GameWorld 01_2048 / Cirulli MIT 2048",
+      "license_scope": "MIT (Gabriele Cirulli, 2014)"
+    },
+    {
+      "path": "games/01_2048/style/fonts/ClearSans-Regular-webfont.woff",
+      "bytes": 26764,
+      "sha256": "8c94cd2fdc93f5a86f1761c0ce14bb695f20e16dc1a585ccad7f0289bd3dbc76",
+      "category": "vendored_third_party",
+      "provenance": "Trimmed GameWorld 01_2048 / Cirulli MIT 2048",
+      "license_scope": "MIT (Gabriele Cirulli, 2014)"
+    },
+    {
+      "path": "games/01_2048/style/fonts/clear-sans.css",
+      "bytes": 311,
+      "sha256": "a5d3585f1e0b5699e0e655abf2a82afb8c3d5446e431ca7c7bd5cf5bca0361e8",
+      "category": "vendored_third_party",
+      "provenance": "Trimmed GameWorld 01_2048 / Cirulli MIT 2048",
+      "license_scope": "MIT (Gabriele Cirulli, 2014)"
+    },
+    {
+      "path": "games/01_2048/style/main.css",
+      "bytes": 15428,
+      "sha256": "432c0bd3d238216308b12a3318b891f8c3a6bb8e97d8813772a2ae780c56fc5f",
+      "category": "vendored_third_party",
+      "provenance": "Trimmed GameWorld 01_2048 / Cirulli MIT 2048",
+      "license_scope": "MIT (Gabriele Cirulli, 2014)"
+    },
+    {
+      "path": "games/README.md",
+      "bytes": 1589,
+      "sha256": "ca4f699d8a26932c731800468437d958288d3873269a0d772a939ee128ce3cdc",
+      "category": "authored_documentation",
+      "provenance": "Project docs",
+      "license_scope": "Alpha for authored text"
+    },
+    {
+      "path": "requirements-record.txt",
+      "bytes": 46,
+      "sha256": "df66f6627943e92b1fab9c7edec0210b756d13193864eadaa3daa0977ce9f119",
+      "category": "authored_configuration",
+      "provenance": "Public defaults",
+      "license_scope": "Alpha"
+    },
+    {
+      "path": "requirements.txt",
+      "bytes": 24,
+      "sha256": "f554d942e5ed1f0262403a7c5e5b94070f73f25bbeb6e876f1c226c4b431573f",
+      "category": "authored_configuration",
+      "provenance": "Public defaults",
+      "license_scope": "Alpha"
+    },
+    {
+      "path": "third_party/fly.ai/LICENSE",
+      "bytes": 1068,
+      "sha256": "c8e2d5c8a418859147ca83f4bf27fb486e3fbef9bffd4825485210e687927116",
+      "category": "vendored_third_party",
+      "provenance": "flybrain package snapshot from alextitonis/fly.ai commit 125e21a",
+      "license_scope": "MIT (alextitonis, 2026)"
+    },
+    {
+      "path": "third_party/fly.ai/PACKAGE.md",
+      "bytes": 2893,
+      "sha256": "6693073eabb199999874448a3ad3e69f975a0d38146adf363ca4fe75e88e17bf",
+      "category": "vendored_third_party",
+      "provenance": "flybrain package snapshot from alextitonis/fly.ai commit 125e21a",
+      "license_scope": "MIT (alextitonis, 2026)"
+    },
+    {
+      "path": "third_party/fly.ai/README.md",
+      "bytes": 791,
+      "sha256": "e3af67f4ed4229aec73d0937bac4fd6cbfdb15c323e6f3e7ec6541302cdd3ca8",
+      "category": "vendored_third_party",
+      "provenance": "flybrain package snapshot from alextitonis/fly.ai commit 125e21a",
+      "license_scope": "MIT (alextitonis, 2026)"
+    },
+    {
+      "path": "third_party/fly.ai/flybrain/__init__.py",
+      "bytes": 1002,
+      "sha256": "ab553bda511665f9ce24ef3e8d8372b465380ae12975c904ebe5d3e585449010",
+      "category": "vendored_third_party",
+      "provenance": "flybrain package snapshot from alextitonis/fly.ai commit 125e21a",
+      "license_scope": "MIT (alextitonis, 2026)"
+    },
+    {
+      "path": "third_party/fly.ai/flybrain/__main__.py",
+      "bytes": 3087,
+      "sha256": "64b9aa321f95f9e6d8f9163996b7438ec6b93cedb9eca813471454055fd4c09a",
+      "category": "vendored_third_party",
+      "provenance": "flybrain package snapshot from alextitonis/fly.ai commit 125e21a",
+      "license_scope": "MIT (alextitonis, 2026)"
+    },
+    {
+      "path": "third_party/fly.ai/flybrain/brain.py",
+      "bytes": 9406,
+      "sha256": "142ecfffd5d32e30655829e34b38b04024e49beae662bd078279e9610c789b0c",
+      "category": "vendored_third_party",
+      "provenance": "flybrain package snapshot from alextitonis/fly.ai commit 125e21a",
+      "license_scope": "MIT (alextitonis, 2026)"
+    },
+    {
+      "path": "third_party/fly.ai/flybrain/build.py",
+      "bytes": 9634,
+      "sha256": "34d71674537c7f1206b92c8f233dcbd3b878d39adddfbb7a8916b62d2f4c1e95",
+      "category": "vendored_third_party",
+      "provenance": "flybrain package snapshot from alextitonis/fly.ai commit 125e21a",
+      "license_scope": "MIT (alextitonis, 2026)"
+    },
+    {
+      "path": "third_party/fly.ai/flybrain/data.py",
+      "bytes": 3447,
+      "sha256": "78fbdd43601462f36150e9e8b62719e92e7b422ed81581c3f7a8a9754cb31d88",
+      "category": "vendored_third_party",
+      "provenance": "flybrain package snapshot from alextitonis/fly.ai commit 125e21a",
+      "license_scope": "MIT (alextitonis, 2026)"
+    },
+    {
+      "path": "third_party/fly.ai/flybrain/eyes.py",
+      "bytes": 5455,
+      "sha256": "95f0603d76ee583bda2f2b0eef4c5ccf60fa2c7662e3aeaa106428611dca817e",
+      "category": "vendored_third_party",
+      "provenance": "flybrain package snapshot from alextitonis/fly.ai commit 125e21a",
+      "license_scope": "MIT (alextitonis, 2026)"
+    },
+    {
+      "path": "third_party/fly.ai/flybrain/reservoir.py",
+      "bytes": 12687,
+      "sha256": "e3c87b6cce4785ce77d1292833835f025fcf5acb191b337e79ea2fdb1c72d68d",
+      "category": "vendored_third_party",
+      "provenance": "flybrain package snapshot from alextitonis/fly.ai commit 125e21a",
+      "license_scope": "MIT (alextitonis, 2026)"
+    },
+    {
+      "path": "third_party/fly.ai/flybrain/web.py",
+      "bytes": 5432,
+      "sha256": "fcd09e03d91ea0c81ec8168e0149359cf35db3bd9b8d5d4d55636ae81b3cef45",
+      "category": "vendored_third_party",
+      "provenance": "flybrain package snapshot from alextitonis/fly.ai commit 125e21a",
+      "license_scope": "MIT (alextitonis, 2026)"
+    },
+    {
+      "path": "third_party/fly.ai/pyproject.toml",
+      "bytes": 1146,
+      "sha256": "3a06c4418a38d49e5aa3fe992fff01f89c3e66809fe33ecf6b149bedbee1a140",
+      "category": "vendored_third_party",
+      "provenance": "flybrain package snapshot from alextitonis/fly.ai commit 125e21a",
+      "license_scope": "MIT (alextitonis, 2026)"
+    }
+  ]
+}

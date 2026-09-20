@@ -1,0 +1,19 @@
+{
+  "preview_gif": "assets/flybrain-2048.gif",
+  "kind": "full_game_recording",
+  "controller": "flybrain MaleCNS connectome, untrained readout",
+  "brain": "fly.ai / flybrain",
+  "brain_source": "https://github.com/alextitonis/fly.ai",
+  "brain_license": "MIT, Copyright (c) 2026 alextitonis",
+  "game": "GameWorld 01_2048",
+  "game_source": "https://github.com/gameworld-project/GameWorld-Games",
+  "upstream_puzzle": "https://github.com/gabrielecirulli/2048",
+  "seed": 64,
+  "outcome": "game_over",
+  "score": 2896,
+  "max_tile": 256,
+  "duration_s": 132,
+  "resolution": "1600x900",
+  "bytes": 19004537,
+  "sha256": "51cea57958549ea2c149b4e4d852cd841b62d7d78aa00a1b9206bd83c899ab8a"
+}
